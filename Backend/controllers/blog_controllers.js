@@ -11,6 +11,21 @@ const getAllBlogs = async (req, res) => {
     }
 }
 
+// getting single blog using id 
+const getBlogById = async (req, res) => {
+    try {
+        const blog = await Blog.findById(req.params.id);
+        if (blog) {
+            res.status(200).json(blog);
+        } else {
+            res.status(404).json({ message: "Blog not found" });
+        }
+    } catch (error) {
+        console.log("Something went wrong", error);
+        res.status(500).json({ message: "Internal server error" });
+    }
+}
+
 // Creating a new blog 
 const createBlog = async (req, res) => {
     try {
@@ -57,4 +72,4 @@ const disLikeBlog = async (req, res) => {
     }
 }
 
-module.exports = { getAllBlogs, createBlog, likeBlog, disLikeBlog };
+module.exports = { getAllBlogs, getBlogById, createBlog, likeBlog, disLikeBlog };
