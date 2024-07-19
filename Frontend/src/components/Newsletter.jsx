@@ -7,7 +7,7 @@ const Newsletter = () => {
                 <div className="flex flex-col md:flex-row-reverse items-center justify-center md:justify-between">
                     {/* Left Side: Newsletter Form */}
                     <div className="w-full md:w-1/2 mb-4 md:mb-0">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Subscribe to Our Newsletter</h2>
+                        <h2 className="text-3xl md:text-3xl font-bold text-gray-800 mb-4">Subscribe to our newsletter to get the latest updates and news</h2>
                         <form className="flex items-center justify-center max-w-lg ">
                             <input
                                 type="email"

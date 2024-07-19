@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Newsletter from '../components/Newsletter';
 
 const BlogDetails = () => {
     const { id } = useParams();
@@ -7,51 +8,72 @@ const BlogDetails = () => {
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const blogsPerPage = 3; // Number of popular posts per page
+    const [likedBlogs, setLikedBlogs] = useState([]);
 
     useEffect(() => {
-        const fetchBlog = async () => {
-            try {
-                const response = await fetch(`http://localhost:5000/v1/api/blog/getsingleblog/${id}`);
-                const data = await response.json();
-                setBlog(data);
-            } catch (error) {
-                console.error('Failed to fetch blog:', error);
-            }
-        };
-
-        const fetchAllBlogs = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/v1/api/blog/getAllBlogs');
-                const data = await response.json();
-                setBlogs(data);
-            } catch (error) {
-                console.error('Failed to fetch blogs:', error);
-            }
-        };
-
         fetchBlog();
         fetchAllBlogs();
+        loadLikedBlogs();
     }, [id]);
 
+    const fetchBlog = async () => {
+        try {
+            const response = await fetch(`http://localhost:5000/v1/api/blog/getsingleblog/${id}`);
+            const data = await response.json();
+            setBlog(data);
+        } catch (error) {
+            console.error('Failed to fetch blog:', error);
+        }
+    };
+
+    const fetchAllBlogs = async () => {
+        try {
+            const response = await fetch('http://localhost:5000/v1/api/blog/getAllBlogs');
+            const data = await response.json();
+            setBlogs(data);
+        } catch (error) {
+            console.error('Failed to fetch blogs:', error);
+        }
+    };
+
+    const loadLikedBlogs = () => {
+        const liked = JSON.parse(localStorage.getItem('likedBlogs')) || [];
+        setLikedBlogs(liked);
+    };
+
+    const saveLikedBlogs = (liked) => {
+        localStorage.setItem('likedBlogs', JSON.stringify(liked));
+    };
+
     const handleLike = async () => {
+        if (likedBlogs.includes(id)) return;
+
         try {
             const response = await fetch(`http://localhost:5000/v1/api/blog/${id}/like`, {
                 method: 'PATCH',
             });
             const data = await response.json();
             setBlog(data);
+            const updatedLikedBlogs = [...likedBlogs, id];
+            setLikedBlogs(updatedLikedBlogs);
+            saveLikedBlogs(updatedLikedBlogs);
         } catch (error) {
             console.error('Failed to like blog:', error);
         }
     };
 
     const handleUnlike = async () => {
+        if (!likedBlogs.includes(id)) return;
+
         try {
             const response = await fetch(`http://localhost:5000/v1/api/blog/${id}/unlike`, {
                 method: 'PATCH',
             });
             const data = await response.json();
             setBlog(data);
+            const updatedLikedBlogs = likedBlogs.filter(blogId => blogId !== id);
+            setLikedBlogs(updatedLikedBlogs);
+            saveLikedBlogs(updatedLikedBlogs);
         } catch (error) {
             console.error('Failed to unlike blog:', error);
         }
@@ -61,7 +83,7 @@ const BlogDetails = () => {
         return <div>Loading...</div>;
     }
 
-    // Calculate pagination for popular posts
+    //  pagination logic implementing
     const indexOfLastBlog = currentPage * blogsPerPage;
     const indexOfFirstBlog = indexOfLastBlog - blogsPerPage;
     const currentPopularBlogs = blogs.filter(b => b._id !== blog._id).slice(indexOfFirstBlog, indexOfLastBlog);
@@ -69,7 +91,7 @@ const BlogDetails = () => {
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     return (
-        <div className="max-w-6xl mx-auto mt-10 p-6 bg-white ">
+        <div className="max-w-6xl mx-auto mt-10 p-6 bg-white">
             <h1 className="text-3xl font-bold mt-4">{blog.title}</h1>
             <img src={blog.imageUrl} alt={blog.title} className="w-full h-96 object-cover rounded-md" />
             <div className='flex justify-between'>
@@ -80,12 +102,16 @@ const BlogDetails = () => {
                 <div className="flex items-center mt-4">
                     <button
                         onClick={handleLike}
-                        className="bg-blue-500 text-white px-4 py-2 rounded mr-4">
-                        Like
+                        disabled={likedBlogs.includes(id)}
+                        className="bg-blue-500 text-white px-4 py-2 rounded mr-4"
+                    >
+                        {likedBlogs.includes(id) ? 'Liked' : 'Like'}
                     </button>
                     <button
                         onClick={handleUnlike}
-                        className="bg-red-500 text-white px-4 py-2 rounded">
+                        disabled={!likedBlogs.includes(id)}
+                        className="bg-red-500 text-white px-4 py-2 rounded"
+                    >
                         Unlike
                     </button>
                     <p className="ml-4 text-gray-600">Likes: {blog.likes}</p>
@@ -121,6 +147,8 @@ const BlogDetails = () => {
                     </button>
                 ))}
             </div>
+
+            <Newsletter />
         </div>
     );
 };
