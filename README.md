@@ -18,13 +18,13 @@ Welcome to the Froker Blog Page! This project showcases different blogs, allows 
 ## Screenshots
 
 ![Home Page](https://github.com/user-attachments/assets/b880412b-4d3f-4512-b85b-74e82b4ee3a6)
-*Home page showing a list of blogs.*
+*Home page*
 
 ![Blog Page](https://github.com/user-attachments/assets/fed7dadc-88e3-4147-8045-9dc27d9c9fb0)
 *Blog page showing the full content of a blog.*
 
 ![Like Dislike Feature](https://github.com/user-attachments/assets/f2ffc27b-31de-4458-8921-c7c255446fc4)
-*Like and dislike feature for user engagement.*
+*Like and dislike feature*
 
 
 **Assignment by Froker**
