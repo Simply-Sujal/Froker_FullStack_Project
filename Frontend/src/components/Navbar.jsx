@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div className="container mx-auto flex items-center justify-between py-2 px-6 md:px-20">
                     {/* Logo/Brand */}
                     <div className="flex items-center">
-                        <img src={frokerlogo} alt="Froker Logo" className="w-auto h-auto" />
+                        <Link to="/"><img src={frokerlogo} alt="Froker Logo" className="w-auto h-auto" /></Link>
                     </div>
 
                     <div className="hidden md:flex space-x-12 text-xl">

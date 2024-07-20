@@ -7,7 +7,7 @@ const BlogDetails = () => {
     const [blog, setBlog] = useState(null);
     const [blogs, setBlogs] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const blogsPerPage = 3; // Number of popular posts per page
+    const blogsPerPage = 6; // Number of popular posts per page
     const [likedBlogs, setLikedBlogs] = useState([]);
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const BlogDetails = () => {
 
     const fetchBlog = async () => {
         try {
-            const response = await fetch(`http://localhost:5000/v1/api/blog/getsingleblog/${id}`);
+            const response = await fetch(`https://froker-backend.vercel.app/v1/api/blog/getsingleblog/${id}`);
             const data = await response.json();
             setBlog(data);
         } catch (error) {
@@ -28,7 +28,7 @@ const BlogDetails = () => {
 
     const fetchAllBlogs = async () => {
         try {
-            const response = await fetch('http://localhost:5000/v1/api/blog/getAllBlogs');
+            const response = await fetch('https://froker-backend.vercel.app/v1/api/blog/getAllBlogs');
             const data = await response.json();
             setBlogs(data);
         } catch (error) {
@@ -49,7 +49,7 @@ const BlogDetails = () => {
         if (likedBlogs.includes(id)) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/v1/api/blog/${id}/like`, {
+            const response = await fetch(`https://froker-backend.vercel.app/v1/api/blog/${id}/like`, {
                 method: 'PATCH',
             });
             const data = await response.json();
@@ -66,7 +66,7 @@ const BlogDetails = () => {
         if (!likedBlogs.includes(id)) return;
 
         try {
-            const response = await fetch(`http://localhost:5000/v1/api/blog/${id}/unlike`, {
+            const response = await fetch(`https://froker-backend.vercel.app/v1/api/blog/${id}/unlike`, {
                 method: 'PATCH',
             });
             const data = await response.json();
@@ -92,7 +92,7 @@ const BlogDetails = () => {
 
     return (
         <div className="max-w-6xl mx-auto mt-10 p-6 bg-white">
-            <h1 className="text-3xl font-bold mt-4">{blog.title}</h1>
+            <h1 className="text-3xl font-bold mt-4 mb-4">{blog.title}</h1>
             <img src={blog.imageUrl} alt={blog.title} className="w-full h-96 object-cover rounded-md" />
             <div className='flex justify-between'>
                 <div className='flex items-center gap-3'>

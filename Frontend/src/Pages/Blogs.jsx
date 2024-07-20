@@ -10,7 +10,7 @@ const Blogs = () => {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const response = await fetch('http://localhost:5000/v1/api/blog/getAllBlogs');
+                const response = await fetch('https://froker-backend.vercel.app/v1/api/blog/getAllBlogs');
                 const data = await response.json();
                 setBlogs(data);
             } catch (error) {
