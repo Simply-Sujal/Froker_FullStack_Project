@@ -17,29 +17,19 @@ Welcome to the Froker Blog Page! This project showcases different blogs, allows 
 
 ## Screenshots
 
-![Home Page]((https://github.com/user-attachments/assets/b880412b-4d3f-4512-b85b-74e82b4ee3a6))
+![Home Page](https://github.com/user-attachments/assets/b880412b-4d3f-4512-b85b-74e82b4ee3a6)
 *Home page showing a list of blogs.*
 
-![Blog Page]((https://github.com/user-attachments/assets/fed7dadc-88e3-4147-8045-9dc27d9c9fb0))
+![Blog Page](https://github.com/user-attachments/assets/fed7dadc-88e3-4147-8045-9dc27d9c9fb0)
 *Blog page showing the full content of a blog.*
 
-![Like Dislike Feature]((https://github.com/user-attachments/assets/f2ffc27b-31de-4458-8921-c7c255446fc4))
+![Like Dislike Feature](https://github.com/user-attachments/assets/f2ffc27b-31de-4458-8921-c7c255446fc4)
 *Like and dislike feature for user engagement.*
 
-## Getting Started
-
-Follow these instructions to get a copy of the project up and running on your local machine for development and testing purposes.
-
-### Prerequisites
-
-Make sure you have the following installed on your machine:
-
-- Node.js
-- npm (Node Package Manager)
-- MongoDB
 
 **Assignment by Froker**
 
 This project was developed as part of an assignment given by the company Froker. The goal was to create a blog page with various features to enhance user experience and demonstrate technical proficiency.
 
 ---
+
